@@ -27,56 +27,6 @@ def frac_to_float(frac_str):
         return whole - frac if whole < 0 else whole + frac
 
 
-def find_ingredient_quantity(ing):
-    ingredient_split_list = ing.split()
-    amount = 0
-    for num in ingredient_split_list:
-        frac_match = re.search(fraction_match, num)
-        if frac_match:
-            amount += frac_to_float(frac_match.group(0))
-    return amount
-
-
-def find_ingredient_measurement(ing):
-    ingredient_split_list = ing.split()
-    measurement = ""
-    no_nums_ingredient = [w for w in ingredient_split_list if not re.search(fraction_match, w)]
-    i = no_nums_ingredient[0]
-    measurement = i if re.search(r"(?=("+'|'.join(measurements)+r"))", i) else ""
-    return measurement
-
-
-def find_ingredient_preparation(ing):
-    ingredient_split_list = ing.split(',')
-    prep = ""
-    if len(ingredient_split_list) > 1:
-        prep = ingredient_split_list[1]
-    return prep.strip()
-
-def find_ingredient_name(ing):
-    # remove meas, qty, and prep
-    ingredient_split_list = ing.split()
-    no_nums_ingredient = [w for w in ingredient_split_list if not re.search(fraction_match, w)]
-    if find_ingredient_measurement(ing) in no_nums_ingredient:
-        no_nums_ingredient.remove(find_ingredient_measurement(ing))
-    name = ' '.join(no_nums_ingredient)
-    # remove descriptor
-    prep = find_ingredient_preparation(ing)
-    if prep is not "":
-        name = name.replace(prep, "")
-    return name
-
-
-def find_ingredient_descriptor(name):
-    n = name.split()
-    descriptor = ""
-    if len(n) > 1:
-        descriptor = n[0]
-    # if find_ingredient_measurement(ingredient_split_list) is not "":
-        # the descriptor is the next thing if the len of list w/o measurement is > 1
-    return descriptor
-
-
 '''
 Input: the ingredient string ex. "4 3/5 ounces goat milk"
 Prints: 4 3/5 ounces goat milk
@@ -109,16 +59,74 @@ def get_ingredient_names(ingredients_list):
         names.append(s.replace(find_ingredient_descriptor(s), "").strip())
     return names
 
-for i in ingredients_list:
-    print i
-    print_ingredient(i)
+# for i in ingredients_list:
+#     print i
+#     print_ingredient(i)
 
-print get_ingredient_names(ingredients_list)
-#
-# class Ingredient:
-#     def __init__(self, details):
-#         self.name =
-#         self.quantity = find_ingredient_quantity()
-#         self.measurement
-#         self.descriptor =
-#         self.preparation =
+# print get_ingredient_names(ingredients_list)
+
+class Ingredient:
+    def __init__(self, ing_string):
+        self.str = ing_string
+        self.name = ""
+        self.quantity = 0
+        self.measurement = ""
+        self.descriptor = ""
+        self.preparation = ""
+
+        def find_ingredient_quantity(self, ing):
+            ingredient_split_list = ing.split()
+            amount = 0
+            for num in ingredient_split_list:
+                frac_match = re.search(fraction_match, num)
+                if frac_match:
+                    amount += frac_to_float(frac_match.group(0))
+            return amount
+
+        def find_ingredient_measurement(self, ing):
+            ingredient_split_list = ing.split()
+            measurement = ""
+            no_nums_ingredient = [w for w in ingredient_split_list if not re.search(fraction_match, w)]
+            i = no_nums_ingredient[0]
+            measurement = i if re.search(r"(?=("+'|'.join(measurements)+r"))", i) else ""
+            return measurement
+
+
+        def find_ingredient_preparation(self, ing):
+            ingredient_split_list = ing.split(',')
+            prep = ""
+            if len(ingredient_split_list) > 1:
+                prep = ingredient_split_list[1]
+            return prep.strip()
+
+        def find_ingredient_name(self, ing):
+            # remove meas, qty, and prep
+            ingredient_split_list = ing.split()
+            no_nums_ingredient = [w for w in ingredient_split_list if not re.search(fraction_match, w)]
+            if find_ingredient_measurement(self, ing) in no_nums_ingredient:
+                no_nums_ingredient.remove(find_ingredient_measurement(self, ing))
+            name = ' '.join(no_nums_ingredient)
+            # remove descriptor
+            prep = find_ingredient_preparation(self, ing)
+            if prep is not "":
+                name = name.replace(prep, "")
+            return name
+
+
+        def find_ingredient_descriptor(self, name):
+            n = name.split()
+            descriptor = ""
+            if len(n) > 1:
+                descriptor = n[0]
+            return descriptor
+
+        self.name = find_ingredient_name(self, self.str)
+        self.quantity = find_ingredient_quantity(self, self.str)
+        self.measurement = find_ingredient_measurement(self, self.str)
+        self.descriptor = find_ingredient_descriptor(self, self.name)
+        self.preparation = find_ingredient_preparation(self, self.str)
+        self.name = self.name.replace(find_ingredient_descriptor(self, self.name), "").strip()
+
+for  i in ingredients_list:
+    b = Ingredient(i)
+    print "NAME:", b.name, "; QTY:", b.quantity, "; MSR:", b.measurement, "; DESC:", b.descriptor, "; PREP:", b.preparation, '\n'
