@@ -73,6 +73,7 @@ class Ingredient:
         self.measurement = ""
         self.descriptor = ""
         self.preparation = ""
+        self.name_with_descriptor = ""
 
         def find_ingredient_quantity(self, ing):
             ingredient_split_list = ing.split()
@@ -120,7 +121,7 @@ class Ingredient:
                 descriptor = n[0]
             return descriptor
 
-        self.name = find_ingredient_name(self, self.str)
+        self.name_with_descriptor = find_ingredient_name(self, self.str)
         self.quantity = find_ingredient_quantity(self, self.str)
         self.measurement = find_ingredient_measurement(self, self.str)
         self.descriptor = find_ingredient_descriptor(self, self.name)
