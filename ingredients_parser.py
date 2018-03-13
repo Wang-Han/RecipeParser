@@ -28,25 +28,6 @@ def frac_to_float(frac_str):
 
 
 '''
-Input: the ingredient string ex. "4 3/5 ounces goat milk"
-Prints: 4 3/5 ounces goat milk
-        NAME: goat milk
-        QTY: 4.6
-        MSRMNT: ounces
-        DESC: goat
-        PREP:
-Prints out ingredient info
-'''
-def print_ingredient(ing):
-        i_name = find_ingredient_name(i)
-        print "NAME:", find_ingredient_name(i)
-        print "QTY:", find_ingredient_quantity(i)
-        print "MSRMNT:",  find_ingredient_measurement(i)
-        print "DESC:", find_ingredient_descriptor(i_name)
-        print "PREP:", find_ingredient_preparation(i),'\n'
-
-
-'''
 Input: List of full ingredients (ex. ["1/8 teaspoon hot pepper sauce", "4 3/5 ounces goat milk"])
 Return: list of stripped ingredient names (ex. ["pepper sauce", "milk"])
 
@@ -124,10 +105,25 @@ class Ingredient:
         self.name_with_descriptor = find_ingredient_name(self, self.str)
         self.quantity = find_ingredient_quantity(self, self.str)
         self.measurement = find_ingredient_measurement(self, self.str)
-        self.descriptor = find_ingredient_descriptor(self, self.name)
+        self.descriptor = find_ingredient_descriptor(self, self.name_with_descriptor)
         self.preparation = find_ingredient_preparation(self, self.str)
-        self.name = self.name.replace(find_ingredient_descriptor(self, self.name), "").strip()
+        self.name = self.name_with_descriptor.replace(find_ingredient_descriptor(self, self.name_with_descriptor), "").strip()
+
+
+    '''
+Input: the ingredient string ex. "4 3/5 ounces goat milk"
+Prints:
+    NAME: milk
+    QTY: 4.6
+    MEASUREMENT: ounces
+    DESCRIPTOR: goat
+    PREPARATION:
+Prints out ingredient info
+'''
+def print_ingredient(ing):
+    b = Ingredient(ing)
+    # i_name = find_ingredient_name(i)
+    print "NAME:", b.name, "\nQTY:", b.quantity, "\nMEASUREMENT:", b.measurement, "\nDESCRIPTOR:", b.descriptor, "\nPREPARATION:", b.preparation, '\n'
 
 for  i in ingredients_list:
-    b = Ingredient(i)
-    print "NAME:", b.name, "; QTY:", b.quantity, "; MSR:", b.measurement, "; DESC:", b.descriptor, "; PREP:", b.preparation, '\n'
+    print_ingredient(i)
