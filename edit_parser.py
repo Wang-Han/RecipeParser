@@ -24,9 +24,37 @@ for i in lst:
 # for g in x:
 #     print g
 
+
+
+
+# all_ing = get_ingredients()
+# print len(all_ing)
+print "done"
+recipe = scrapeRecipe("https://www.allrecipes.com/recipe/21412/tiramisu-ii/?clickId=right%20rail0&internalSource=rr_feed_recipe_sb&referringId=247082%20referringContentType%3Drecipe")
+ings = recipe[0]
+steps = recipe[1]
+print ings, '\n' #, steps, '\n'
+
+# TODO:
+# ADD: tomato sauce, cooking spray, tortillas, yellow squash, zucchini, tortillas, bell pepper,
+# REMOVE: fat,
+# make subs for healthy, veg, chinese,
+# make better ingredient parser
+
+
+# lstlst = []
+# for i in ings: # from scraper
+#     name_ret = get_ing_name(i)
+#     lstlst.append(name_ret)
+
+
+
+# stuff in front == qty, DESCRIPTOR
+# stuff after == prep
+
 fraction_match = r"(\d+[\/\d. ]*|\d)" # /g means global match
 measurements = [r'([a-z]+)spoons?', r'cloves?', r'cups?', r'pounds?', r'ounces?', r'large',
-r'medium', r'small', r'packs?', r'pints?', r'quarts?', r'gallons?', r'bushel', r'grams?', r'dessertspoons?']
+r'medium', r'small', r'packs?', r'pints?', r'quarts?', r'gallons?', r'bushel', r'grams?']
 
 def frac_to_float(frac_str):
     try:
@@ -41,17 +69,32 @@ def frac_to_float(frac_str):
         frac = float(num) / float(denom)
         return whole - frac if whole < 0 else whole + frac
 
-def get_ing_name(ing):
+def bbc_ingredients_from_txt():
+        t = []
+        for true_ing in all_ing_list: # real ings from bbc
+            ing_regex_single = r'\b{0}\b'.format(true_ing)
+            ing_regex_plural = r'\b{0}\b'.format(pluralize(true_ing))
+            match_single = re.search(ing_regex_single, true_ing.lower())
+            match_plural = re.search(ing_regex_plural, true_ing.lower())
+            if match_single:
+                t.append(true_ing.lower())
+            elif match_plural:
+                t.append(pluralize(true_ing.lower()))
+        print "HEREHEREHEREHEREHEREHERE:", t
+
+
+def get_all_names(ingredients):
     t = []
     for true_ing in all_ing_list: # real ings from bbc
         ing_regex_single = r'\b{0}\b'.format(true_ing)
         ing_regex_plural = r'\b{0}\b'.format(pluralize(true_ing))
-        match_single = re.search(ing_regex_single, i.lower())
-        match_plural = re.search(ing_regex_plural, i.lower())
+        match_single = re.search(ing_regex_single, true_ing.lower())
+        match_plural = re.search(ing_regex_plural, true_ing.lower())
         if match_single:
-            t.append(true_ing)
+            t.append(true_ing.lower())
         elif match_plural:
-            t.append(pluralize(true_ing))
+            t.append(pluralize(true_ing.lower()))
+    print "HEREHEREHEREHEREHEREHERE:", t
 
     seen = set()
     seen_add = seen.add
@@ -59,19 +102,37 @@ def get_ing_name(ing):
 
     t.sort(key=lambda x: len(x.split()), reverse=True)
 
-    lst_of_lst = []
-    name = ""
-    # for i in ings:
-    for db_ingredient in t:
-        if db_ingredient in ing.lower():
-            print "HERE:", db_ingredient
-            name = db_ingredient
-            # db_ingredient is now the name of the Ingredient
-            lst_of_lst.append(i.split(db_ingredient))
-            break
+    print t
 
-    # print '\n', lst_of_lst
-    return [name, lst_of_lst]
+    names = []
+    desc_and_prep = []
+
+    name = ""
+    for i in ingredients:
+        for db_ingredient in t:
+            if db_ingredient in i.lower():
+                print "HERE:", db_ingredient
+                names.append(db_ingredient)
+                # db_ingredient is now the name of the Ingredient
+                desc_and_prep.append(i.split(db_ingredient))
+                break
+
+    return [names, desc_and_prep] #[ ['white sugar'], [[u'1 cup', u'']]]
+
+
+
+# class Ingredient:
+#     def __init__(self, ing_string):
+#         self.str = ing_string
+#         self.name = ""
+#         self.quantity = 0
+#         self.measurement = ""
+#         self.descriptor = ""
+#         self.preparation = ""
+#         # self.name_with_descriptor = ""
+#
+#         # def make_ingredients():
+#         #     return lst_of_ingredients
 
 def get_ing_quantity(ing_front):
     ingredient_split_list = ing_front.split()
@@ -105,39 +166,20 @@ def get_ing_preparation(ing_back):
     return ing_back.strip()
 
 
-# all_ing = get_ingredients()
-# print len(all_ing)
-print "done"
-recipe = scrapeRecipe("https://www.allrecipes.com/recipe/21412/tiramisu-ii/?clickId=right%20rail0&internalSource=rr_feed_recipe_sb&referringId=247082%20referringContentType%3Drecipe")
-ings = recipe[0]
-steps = recipe[1]
-print ings, '\n' #, steps, '\n'
-
-# TODO:
-# ADD: tomato sauce, cooking spray, tortillas, yellow squash, zucchini, tortillas, bell pepper,
-# REMOVE: fat,
-# make subs for healthy, veg, chinese,
-# make better ingredient parser
-
-
-lstlst = []
-for i in ings: # from scraper
-    name_ret = get_ing_name(i)
-    lstlst.append(name_ret)
-
-for lst in lstlst:
-    print lst
-    qty = get_ing_quantity(lst[1][0][0])
-    print qty
-    msrmnt = get_ing_measurement(lst[1][0][0])
-    print msrmnt
-    d = get_ing_descriptor(lst[1][0][0])
-    print d
-    print lst[0]
-    # if len(lst) > 1:
-    #     p = get_ing_preparation(lst[1])
-    #     print p
-
-
-# stuff in front == qty, DESCRIPTOR
-# stuff after == prep
+def print_ingredients(all_names_results): # substitution -> "vegan", "greek", etc. --> name = name[x].greek: figure out how to incorporate IngredientBook
+    all_results = get_all_names(ings)
+    names = all_results[0]
+    other = all_results[1]
+    for x in range(len(names)):
+        # b = Ingredient(i)
+        name = names[x]
+        print name
+        qty = get_ing_quantity(other[x][0])
+        print qty
+        msrmnt = get_ing_measurement(other[x][0])
+        print msrmnt
+        desc = get_ing_descriptor(other[x][0])
+        print desc
+        if len(other) > 1:
+            prep = get_ing_preparation(other[x][1])
+            print prep
