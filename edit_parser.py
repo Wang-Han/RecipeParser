@@ -21,11 +21,11 @@ from pattern.en import pluralize
 
 # all_ing = get_ingredients()
 # print len(all_ing)
-print "done"
+#print "done"
 recipe = scrapeRecipe("https://www.allrecipes.com/recipe/21412/tiramisu-ii/?clickId=right%20rail0&internalSource=rr_feed_recipe_sb&referringId=247082%20referringContentType%3Drecipe")
 ings = recipe[0]
 steps = recipe[1]
-print ings, '\n' #, steps, '\n'
+#print ings, '\n' #, steps, '\n'
 
 # TODO:
 # ADD: tomato sauce, cooking spray, tortillas, yellow squash, zucchini, tortillas, bell pepper,
@@ -72,7 +72,7 @@ def bbc_ingredients_from_txt():
                 t.append(true_ing.lower())
             elif match_plural:
                 t.append(pluralize(true_ing.lower()))
-        print "HEREHEREHEREHEREHEREHERE:", t
+        #print "HEREHEREHEREHEREHEREHERE:", t
 
 
 '''
@@ -98,13 +98,13 @@ def get_all_names(url):
     for true_ing in all_ing_list: # real ings from bbc
         ing_regex_single = r'\b{0}\b'.format(true_ing)
         ing_regex_plural = r'\b{0}\b'.format(pluralize(true_ing))
-        match_single = re.search(ing_regex_single, true_ing.lower())
-        match_plural = re.search(ing_regex_plural, true_ing.lower())
+        match_single = re.search(re.escape(ing_regex_single), true_ing.lower())
+        match_plural = re.search(re.escape(ing_regex_plural), true_ing.lower())
         if match_single:
             t.append(true_ing.lower())
         elif match_plural:
             t.append(pluralize(true_ing.lower()))
-    print "HEREHEREHEREHEREHEREHERE:", t
+    #print "HEREHEREHEREHEREHEREHERE:", t
 
     seen = set()
     seen_add = seen.add
@@ -112,16 +112,16 @@ def get_all_names(url):
 
     t.sort(key=lambda x: len(x.split()), reverse=True)
 
-    print t
+    #print t
 
     names = []
     desc_and_prep = []
 
     name = ""
-    for i in ingredients:
+    for i in ings:
         for db_ingredient in t:
             if db_ingredient in i.lower():
-                print "HERE:", db_ingredient
+                #print "HERE:", db_ingredient
                 names.append(db_ingredient)
                 # db_ingredient is now the name of the Ingredient
                 desc_and_prep.append(i.split(db_ingredient))
@@ -183,13 +183,13 @@ def print_ingredients(all_names_results): # substitution -> "vegan", "greek", et
     for x in range(len(names)):
         # b = Ingredient(i)
         name = names[x]
-        print name
+        #print name
         qty = get_ing_quantity(other[x][0])
-        print qty
+        #print qty
         msrmnt = get_ing_measurement(other[x][0])
-        print msrmnt
+        #print msrmnt
         desc = get_ing_descriptor(other[x][0])
-        print desc
+        #print desc
         if len(other) > 1:
             prep = get_ing_preparation(other[x][1])
-            print prep
+            #print prep
