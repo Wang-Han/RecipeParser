@@ -1,7 +1,7 @@
 from write_book import * 
 from edit_parser import *
 import requests
-
+from time import sleep
 def testIngredients(startNum, recipeCount):
 	failedIngredients = []
 	ingredientBook = writeBook().keys()
@@ -15,7 +15,7 @@ def testIngredients(startNum, recipeCount):
 				for n in ingredients:
 					if n not in ingredientBook:
 						failedIngredients.append(n)
-
+		sleep(4)
 	print(failedIngredients)
 
 testIngredients(8740, 10)			

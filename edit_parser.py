@@ -66,8 +66,8 @@ def bbc_ingredients_from_txt():
         for true_ing in all_ing_list: # real ings from bbc
             ing_regex_single = r'\b{0}\b'.format(true_ing)
             ing_regex_plural = r'\b{0}\b'.format(pluralize(true_ing))
-            match_single = re.search(ing_regex_single, true_ing.lower())
-            match_plural = re.search(ing_regex_plural, true_ing.lower())
+            match_single = re.search(re.escape(ing_regex_single, true_ing.lower()))
+            match_plural = re.search(re.escape(ing_regex_plural, true_ing.lower()))
             if match_single:
                 t.append(true_ing.lower())
             elif match_plural:
@@ -183,13 +183,13 @@ def print_ingredients(all_names_results): # substitution -> "vegan", "greek", et
     for x in range(len(names)):
         # b = Ingredient(i)
         name = names[x]
-        #print name
+        print name
         qty = get_ing_quantity(other[x][0])
-        #print qty
+        print qty
         msrmnt = get_ing_measurement(other[x][0])
-        #print msrmnt
+        print msrmnt
         desc = get_ing_descriptor(other[x][0])
-        #print desc
+        print desc
         if len(other) > 1:
             prep = get_ing_preparation(other[x][1])
-            #print prep
+            print prep
