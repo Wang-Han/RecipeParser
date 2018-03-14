@@ -8,14 +8,6 @@ from pattern.en import pluralize
 
 # "allingredients"
 
-all_ingredients = open("allingredients.txt", "r")
-all_ingredients = all_ingredients.read()
-
-lst = all_ingredients.split(',')
-all_ing_list = []
-for i in lst:
-    i = i.replace('u\'', '').replace('\'', '').strip()
-    all_ing_list.append(i)
 # print all_ing_list
 
 # import ast
@@ -83,7 +75,25 @@ def bbc_ingredients_from_txt():
         print "HEREHEREHEREHEREHEREHERE:", t
 
 
-def get_all_names(ingredients):
+'''
+ex. get_all_names(url)[0] --> ['egg yolk', 'white sugar', 'milk', 'cream', 'vanilla extract', 'mascarpone cheese', 'coffee', 'rum', 'ladyfinger cookies', 'cocoa']
+'''
+def get_all_names(url):
+    #scrape
+    recipe = scrapeRecipe(url)
+    ings = recipe[0]
+
+    # get bbc ingredients
+    all_ingredients = open("allingredients.txt", "r")
+    all_ingredients = all_ingredients.read()
+
+    lst = all_ingredients.split(',')
+    all_ing_list = []
+    for i in lst:
+        i = i.replace('u\'', '').replace('\'', '').strip()
+        all_ing_list.append(i)
+
+    #get names
     t = []
     for true_ing in all_ing_list: # real ings from bbc
         ing_regex_single = r'\b{0}\b'.format(true_ing)
