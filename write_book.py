@@ -569,7 +569,7 @@ def writeBook():
     ingredientDic['whitefish'] = IngredientBook('whitefish', '', 'seitan', 'seitan', 'tilapia', 'sea bass')
     ingredientDic['whitebait'] = IngredientBook('whitebait', '', 'tofu', 'tofu', 'cod', '')
     ingredientDic['whole wheat pasta'] = IngredientBook('whole wheat pasta', '', '', 'vegan pasta', 'rice', 'flomaria')
-    ingredientDic['wild mushroom'] = IngredientBook('wild mushroom',  '', '', '', '', 'kalamata olive')
+    ingredientDic['wild mushroom'] = IngredientBook('wild mushroom', '', '', '', '', 'kalamata olive')
     ingredientDic['wine'] = IngredientBook('wine', '', '', '', '', '')
     ingredientDic['yam'] = IngredientBook('yam', '', '', '', 'jicama', 'turnips')
     ingredientDic['bell pepper'] = IngredientBook('bell pepper', '', '', '', '', '')
