@@ -258,7 +258,7 @@ index 0 --> list of ingredient names
 def get_all_names_plus_fixed_rejects(ings, ingredient_book):
     a = get_all_names(ings, ingredient_book)
 
-    b = fix_rejects(a[2], "")
+    b = fix_rejects(a[2], ingredient_book)
 
     merge_list = ings + b
 
@@ -266,7 +266,7 @@ def get_all_names_plus_fixed_rejects(ings, ingredient_book):
     c.append(merge_list)
     return c
 
-d = get_all_names_plus_fixed_rejects(ings, "")
+# d = get_all_names_plus_fixed_rejects(ings, "")
 #
 # # print d[0], '\n'
 # # print d[1], '\n'
@@ -282,8 +282,8 @@ def print_parsed_ingredients(ings, ingredient_book):
         b = "{0} {1} {2} {3} {4}\n".format(ing_dict[k]["quantity"], ing_dict[k]["measurement"], ing_dict[k]["descriptor"], ing_dict[k]["name"], ing_dict[k]["preparation"])
         c = ' '.join(b.split())
         parsed.append(c)
-    for i in parsed:
-        print i
+    # for i in parsed:
+    #     print i
     return parsed
 
 # print_parsed_ingredients(d[3], ingredient_book)
