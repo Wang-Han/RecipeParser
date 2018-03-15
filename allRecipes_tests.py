@@ -13,9 +13,10 @@ def testIngredients(startNum, recipeCount):
 			ingredients = get_all_names(url)[0]
 			if ingredients:
 				for n in ingredients:
+					print('Now Testing: ' + n)
 					if n not in ingredientBook:
 						failedIngredients.append(n)
-		sleep(4)
+		sleep(2)
 	print(failedIngredients)
 
 testIngredients(8740, 10)			
