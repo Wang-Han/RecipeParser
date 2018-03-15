@@ -24,16 +24,16 @@ def testAll(url):
 	methods = get_methods_names(scrapedSteps)	
 		
 	for i in basicIngredients:
-		healthy.append(cookBook[i].healthy)
-		vegetarian.append(cookBook[i].vegetarian)
-		vegan.append(cookBook[i].vegan)
-		greek.append(cookBook[i].greek)
-		mexican.append(cookBook[i].mexican)	
+		healthy.append('substituted ' + str(i) ' for ' + str(cookBook[i].healthy))
+		vegetarian.append('substituted ' + str(i) ' for ' + str(cookBook[i].vegetarian))
+		vegan.append('substituted ' + str(i) ' for ' + str(cookBook[i].vegan))
+		greek.append('substituted ' + str(i) ' for ' + str(cookBook[i].greek))
+		mexican.append('substituted ' + str(i) ' for ' + str(cookBook[i].mexican)	
 
 	transforms = [healthy, vegetarian, vegan, greek, mexican]
 	
 	for l in transforms:
-		print("Now showing ingredients for " + str(l) + " transformation:\n")
+		print("Now showing ingredients for  transformation:\n")
 		if l:
 			for ing in l:
 				print(ing + "\n")
