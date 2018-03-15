@@ -11,6 +11,12 @@ def testAll(url):
 	greek = []
 	mexican = []
 	
+	healthySteps = []
+	vegetarianSteps = []
+	veganSteps = []
+	greekSteps = []
+	mexicanSteps = []
+
 	scraped = scrapeRecipe(url)
 
 	scrapedIng = scraped[0]
@@ -30,6 +36,14 @@ def testAll(url):
 		vegan.append('substituted ' + str(i) + ' for ' + str(cookBook[i].vegan))
 		greek.append('substituted ' + str(i) + ' for ' + str(cookBook[i].greek))
 		mexican.append('substituted ' + str(i) + ' for ' + str(cookBook[i].mexican))	
+	
+	for i in basicIngredients:
+		for counter, s in enumerate(scrapedSteps):
+			healthySteps[counter] = re.sub(i, cookBook[i].healthy, s)
+			vegetarianSteps[counter] = re.sub(i, cookBook[i].vegetarian, s)
+			veganSteps[counter] = re.sub(i, cookBook[i].vegan, s)
+			greekSteps[counter] = re.sub(i, cookBook[i].greek, s)
+			mexicanSteps[counter] = re.sub(i, cookBook[i].mexican, s)
 
 	transforms = [list(set(healthy)), list(set(vegetarian)), list(set(vegan)), list(set(greek)), list(set(mexican))]
 	transformNames = ['healthy', 'vegetarian', 'vegan', 'greek', 'mexican']
