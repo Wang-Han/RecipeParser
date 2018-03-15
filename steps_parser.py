@@ -13,7 +13,7 @@ def get_steps_info(steps, basicIngredients) :
         step_list = []
         step_list.append(step)
         step_txt = str(step)
-        if step_txt != ' ':
+        if len(step_txt) > 2:
             each_step_info = {}
             step_num_list = []
             step_num_list.append(str(cnt))
@@ -61,11 +61,14 @@ def get_steps_time(step):
     step_string = tokenizer.tokenize(step_txt)
     time_units = ['min', 'min.', 'minutes', 'minute', 'hour', 'hours', 'hr', 'hrs', 'hr.', 'hrs.']
     time_string = " "
+    last_index = -1
     for i in range(0, len(step_string) - 2):
-        if i + 3 < len(step_string) and step_string[i].isdigit() and step_string[i + 1] == 'to' and step_string[i + 2].isdigit() and step_string[i + 3] in time_units:
+        if i > last_index and i + 3 < len(step_string) and step_string[i].isdigit() and step_string[i + 1] == 'to' and step_string[i + 2].isdigit() and step_string[i + 3] in time_units:
             time_string += step_string[i] + ' ' + step_string[i + 1] + ' ' + step_string[i + 2] + ' ' + step_string[i + 3] + ' '
-        elif step_string[i].isdigit() and step_string[i + 1] in time_units:
+            last_index = i + 3
+        elif i > last_index and step_string[i].isdigit() and step_string[i + 1] in time_units:
             time_string += step_string[i] + ' ' + step_string[i + 1] + ' '
+            last_index = i + 1
     step_time.append(time_string)
     return step_time
 
@@ -78,4 +81,6 @@ def print_steps(steps, basicIngredients):
     for dic in dics:
         for item in output:
             print item + ":" + str(dic[item])
+
+# print_steps(steps_list, basicIngredients)
 
