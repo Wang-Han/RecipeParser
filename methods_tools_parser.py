@@ -94,4 +94,21 @@ def get_methods_names(steps):
                 other_methods_res.append(method[0])
     return [primary_method_res, other_methods_res]
 
+def print_tools(steps):
+    output = get_tools_names(steps)
+    str = "Tools : "
+    for i in output:
+        str += (i + ' ')
+    print str
+
+def print_methods(steps) :
+    [p, c] = get_methods_names(steps)
+    str1 = "Primary Cooking Methods : "
+    for i in p:
+        str1 += (i + ' ')
+    print str1
+    str2 = "Other Cooking Methods : "
+    for i in c:
+        str2 += (i + ' ')
+    print str2
 # print get_methods_names(steps_list)
