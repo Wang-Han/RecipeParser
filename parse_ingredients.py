@@ -191,12 +191,12 @@ def fix_rejects(rejects, ingredient_book):
         print r_split
 
 
-a = get_all_names(ings, ingredient_book)
+#a = get_all_names(ings, ingredient_book)
 # all_names = a[0]
 # print all_names
 # print_ingredients(ings, ingredient_book)
 # p = parse_ingredients(ings, ingredient_book)
 # print p["coffee"]
-print "REJECTED:", a[2]
+#print "REJECTED:", a[2]
 
-fix_rejects(a[2], "")
+#fix_rejects(a[2], "")
