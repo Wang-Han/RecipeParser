@@ -1,26 +1,12 @@
-from get_ingredients_from_bbc import get_ingredients
 from scraper import scrapeRecipe
 import re
 from pattern.en import pluralize
 
-
-# all_ing = get_ingredients()
-# print len(all_ing)
-print "done"
-# recipe = scrapeRecipe("https://www.allrecipes.com/recipe/21412/tiramisu-ii/?clickId=right%20rail0&internalSource=rr_feed_recipe_sb&referringId=247082%20referringContentType%3Drecipe")
-# ings = recipe[0]
-# steps = recipe[1]
-# print ings, '\n' #, steps, '\n'
-
-
-# lstlst = []
-# for i in ings: # from scraper
-#     name_ret = get_ing_name(i)
-#     lstlst.append(name_ret)
-
-
-# stuff in front == qty, DESCRIPTOR
-# stuff after == prep
+# using for testing because allrecipes got mad
+# ings = [u'6 egg yolks', u'3/4 cup white sugar', u'2/3 cup milk',
+#  u'1 1/4 cups heavy cream', u'1/2 teaspoon vanilla extract', u'1 pound mascarpone cheese',
+#   u'1/4 cup strong brewed coffee, room temperature', u'2 tablespoons rum',
+#   u'2 (3 ounce) packages ladyfinger cookies', u'1 tablespoon unsweetened cocoa powder']
 
 fraction_match = r"(\d+[\/\d. ]*|\d)" # /g means global match
 measurements = [r'([a-z]+)spoons?', r'cloves?', r'cups?', r'pounds?', r'ounces?', r'large',
@@ -39,32 +25,21 @@ def frac_to_float(frac_str):
         frac = float(num) / float(denom)
         return whole - frac if whole < 0 else whole + frac
 
-def bbc_ingredients_from_txt():
-        t = []
-        for true_ing in all_ing_list: # real ings from bbc
-            ing_regex_single = r'\b{0}\b'.format(true_ing)
-            ing_regex_plural = r'\b{0}\b'.format(pluralize(true_ing))
-            match_single = re.search(ing_regex_single, true_ing.lower())
-            match_plural = re.search(ing_regex_plural, true_ing.lower())
-            if match_single:
-                t.append(true_ing.lower())
-            elif match_plural:
-                t.append(pluralize(true_ing.lower()))
-        # print "HEREHEREHEREHEREHEREHERE:", t
-
-
 '''
-ex. get_all_names(url)[0] --> ['egg yolk', 'white sugar', 'milk', 'cream', 'vanilla extract', 'mascarpone cheese', 'coffee', 'rum', 'ladyfinger cookies', 'cocoa']
+ex. get_all_names(recipe_ingredient_list_from_scraper, ingredient_book) -->
+['egg yolk', 'white sugar', 'milk', 'cream', 'vanilla extract', 'mascarpone cheese', 'coffee', 'rum', 'ladyfinger cookies', 'cocoa']
 '''
-def get_all_names(url):
+def get_all_names(ings, ing_book):
     #scrape
-    recipe = scrapeRecipe(url)
-    ings = recipe[0]
+    # recipe = scrapeRecipe(url)
+    # ings = recipe[0]
     ings = map(lambda x:x.lower(), ings)
 
     # get bbc ingredients
-    all_ingredients = open("allingredients.txt", "r")
-    all_ingredients = all_ingredients.read()
+    # all_ingredients = open("new_ing.txt", "r")
+    # all_ingredients = all_ingredients.read()
+
+    all_ingredients = ing_book.keys()
 
     lst = all_ingredients.split(',')
     all_ing_list = []
@@ -90,17 +65,12 @@ def get_all_names(url):
 
     t.sort(key=lambda x: len(x.split()), reverse=True)
 
-    # print t
-
     names = []
     desc_and_prep = []
-
-    name = ""
 
     for i in ings:
         for db_ingredient in t:
             if db_ingredient in i.lower():
-                # print "HERE:", db_ingredient
                 names.append(db_ingredient)
                 # db_ingredient is now the name of the Ingredient
                 desc_and_prep.append(i.split(db_ingredient))
@@ -151,10 +121,10 @@ D: grated
 P:
 "
 '''
-def print_ingredients(url): # substitution -> "vegan", "greek", etc. --> name = name[x].greek: figure out how to incorporate IngredientBook
-    recipe = scrapeRecipe(url)
-    ings = recipe[0]
-    all_results = get_all_names(url)
+def print_ingredients(ings):
+    # recipe = scrapeRecipe(url)
+    # ings = recipe[0]
+    all_results = get_all_names(ings)
     names = all_results[0]
     desc_and_preps = all_results[1]
     for x in range(len(names)):
@@ -165,7 +135,7 @@ def print_ingredients(url): # substitution -> "vegan", "greek", etc. --> name = 
         msrmnt = get_ing_measurement(desc_and_preps[x][0])
         print "M:", msrmnt
         desc = get_ing_descriptor(desc_and_preps[x][0])
-        print "D: ", desc
+        print "D:", desc
         if len(desc_and_preps[x]) > 1:
             prep = get_ing_preparation(desc_and_preps[x][1])
             print "P:", prep
@@ -179,45 +149,36 @@ output:
 use: ex. quantity of parmesan in : p["parmesan cheese"]["quantity"] --> 0.25
 '''
 
-def parse_ingredients(url):
-    recipe = scrapeRecipe(url)
-    ings = recipe[0]
-    all_results = get_all_names(url)
+def parse_ingredients(ings):
+    # recipe = scrapeRecipe(url)
+    # ings = recipe[0]
+    all_results = get_all_names(ings)
     names = all_results[0]
     desc_and_preps = all_results[1]
 
     all_parsed_ings = {}
 
-
     for x in range(len(names)):
         parsed = {"name":"", "quantity":"", "measurement":"", "descriptor":"", "preparation":""}
         name = names[x]
-        # print "N:", name
         parsed["name"] = name
         qty = get_ing_quantity(desc_and_preps[x][0])
-        # print "Q:", qty
         parsed["quantity"] = qty
         msrmnt = get_ing_measurement(desc_and_preps[x][0])
-        # print "M:", msrmnt
         parsed["measurement"] = msrmnt
         desc = get_ing_descriptor(desc_and_preps[x][0])
-        # print "D: ", desc
         parsed["descriptor"] = desc
         if len(desc_and_preps[x]) > 1:
             prep = get_ing_preparation(desc_and_preps[x][1])
-            # print "P:", prep
             parsed["preparation"] = prep
         all_parsed_ings[name] = parsed
     print all_parsed_ings
     return all_parsed_ings
 
-# TODO: Find a way to distinguish same ingredient for different purposes
-# if descriptor is diff, make ame diff?
-# add a new property that can tell the difference
 
-my_url = "https://www.allrecipes.com/recipe/223042/chicken-parmesan/?internalSource=previously%20viewed&referringContentType=home%20page&clickId=cardslot%204"
-all_names = get_all_names(my_url)[0]
-print all_names
-print_ingredients(my_url)
-p = parse_ingredients(my_url)
-print p["parmesan cheese"]
+
+# all_names = get_all_names(ings)[0]
+# print all_names
+# print_ingredients(ings)
+# p = parse_ingredients(ings)
+# print p["coffee"]
