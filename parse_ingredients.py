@@ -29,7 +29,7 @@ def frac_to_float(frac_str):
 ex. get_all_names(recipe_ingredient_list_from_scraper, ingredient_book) -->
 ['egg yolk', 'white sugar', 'milk', 'cream', 'vanilla extract', 'mascarpone cheese', 'coffee', 'rum', 'ladyfinger cookies', 'cocoa']
 '''
-def get_all_names(ings): #, ing_book):
+def get_all_names(ings, ingredient_book):
     #scrape
     # recipe = scrapeRecipe(url)
     # ings = recipe[0]
@@ -39,7 +39,7 @@ def get_all_names(ings): #, ing_book):
     # all_ingredients = open("new_ing.txt", "r")
     # all_ingredients = all_ingredients.read()
 
-    # all_ingredients = ing_book.keys()
+    all_ingredients = ingredient_book.keys()
 
     # lst = all_ingredients.split(',')
     # all_ing_list = []
@@ -130,7 +130,7 @@ P:
 def print_ingredients(ings):
     # recipe = scrapeRecipe(url)
     # ings = recipe[0]
-    all_results = get_all_names(ings)
+    all_results = get_all_names(ings, "")
     names = all_results[0]
     desc_and_preps = all_results[1]
     for x in range(len(names)):
@@ -155,10 +155,10 @@ output:
 use: ex. quantity of parmesan in : p["parmesan cheese"]["quantity"] --> 0.25
 '''
 
-def parse_ingredients(ings):
+def parse_ingredients(ings, ingredient_book):
     # recipe = scrapeRecipe(url)
     # ings = recipe[0]
-    all_results = get_all_names(ings)
+    all_results = get_all_names(ings, "")
     names = all_results[0]
     desc_and_preps = all_results[1]
 
@@ -188,11 +188,11 @@ def fix_rejects(rejects, ingredient_book):
         r_split = [w for w in r_split if not re.search(fraction_match, w)] # take out nums
         print r_split
 
-a = get_all_names(ings)
+a = get_all_names(ings, "")
 # all_names = a[0]
 # print all_names
-# print_ingredients(ings)
-# p = parse_ingredients(ings)
+# print_ingredients(ings, ingredient_book)
+# p = parse_ingredients(ings, ingredient_book)
 # print p["coffee"]
 print "REJECTED:", a[2]
 
