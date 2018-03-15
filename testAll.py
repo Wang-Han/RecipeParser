@@ -1,7 +1,7 @@
 from write_book import *
-from parse_ingredients.py import *
+from parse_ingredients import *
 from scraper import scrapeRecipe
-
+from methods_tools_parse import *
 def testAll(url):
 	cookBook = writeBook()
 	healthy = []
@@ -15,7 +15,12 @@ def testAll(url):
 	scrapedIng = scraped[0]
 	scrapedSteps = scraped[1]
 	#index into the basic names
-	basicIngredients = get_all_names(scrapedIng)[0]
+	#print(scrapedIng)
+	#print(cookBook)
+	basicIngredients = get_all_names(scrapedIng, cookBook)[0]
+	
+	tools = get_tools_names(scrapedSteps)
+	methods = get_methods_names(scrapedSteps)
 	
 	for i in basicIngredients:
 		healthy.append(cookBook[i].healthy)
@@ -24,9 +29,10 @@ def testAll(url):
 		greek.append(cookBook[i].greek)
 		mexican.append(cookBook[i].mexican)	
 
-	transforms = list(healthy, vegetarian, vegan, greek, mexican)
+	transforms = [healthy, vegetarian, vegan, greek, mexican]
 	
 	for l in transforms:
-		print("Now showing ingredients for " + str(l) + " transformation:\n"
-		for ing in l:
-			print(ing + "\n")
+		print("Now showing ingredients for " + str(l) + " transformation:\n")
+		if l:
+			for ing in l:
+				print(ing + "\n")

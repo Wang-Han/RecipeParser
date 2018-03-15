@@ -8,7 +8,7 @@ ings = [u'6 egg yolks', u'3/4 cup white sugar', u'2/3 cup milk',
   u'1/4 cup strong brewed coffee, room temperature', u'2 tablespoons rum',
   u'2 (3 ounce) packages ladyfinger cookies', u'1 tablespoon unsweetened cocoa powder', u'2 cups rose water chilled']
 
-ingredient_book = {}
+#ingredient_book = {}
 
 fraction_match = r"(\d+[\/\d. ]*|\d)" # /g means global match
 measurements = [r'([a-z]+)spoons?', r'cloves?', r'cups?', r'pounds?', r'ounces?', r'large',
