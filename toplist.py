@@ -315,58 +315,55 @@ ingredientDic['nougat'] = IngredientBook('nougat', '', '', '', '', '')
 ingredientDic['nut'] = IngredientBook('nut', '', '', '', 'pinus cembroides', 'almond')
 ingredientDic['nutmeg'] = IngredientBook('nutmeg', '', '', '', 'cinnamon', 'cinnamon')
 ingredientDic['oatmeal'] = IngredientBook('oatmeal', '', '', '', 'avena', '')
-
-
-
------------------------------------------------------------------------
-
 ingredientDic['oats'] = IngredientBook('oats', '', '', '', '', '')
 ingredientDic['octopus'] = IngredientBook('octopus', '', 'seitan', 'seitan', 'shrimp', '')
 ingredientDic['oil'] = IngredientBook('oil', 'olive oil', 'olive oil', 'olive oil', 'vegetable oil', 'olive oil')
 ingredientDic['okra'] = IngredientBook('okra', '', '', '', 'green beans', '')
-ingredientDic['olive'] = IngredientBook('olive', healthy, vegetarian, vegan, mexican, greek)
-ingredientDic['olive oil'] = IngredientBook('olive oil', healthy, vegetarian, vegan, mexican, greek)
-ingredientDic['onion'] = IngredientBook('onion', healthy, vegetarian, vegan, mexican, greek)
-ingredientDic['orange'] = IngredientBook('orange', healthy, vegetarian, vegan, mexican, greek)
-ingredientDic['orange juice'] = IngredientBook('orange juice', healthy, vegetarian, vegan, mexican, greek)
-ingredientDic['oregano'] = IngredientBook('oregano', healthy, vegetarian, vegan, mexican, greek)
-ingredientDic['beef oxtail'] = IngredientBook('beef oxtail', healthy, vegetarian, vegan, mexican, greek)
-ingredientDic['oyster'] = IngredientBook('oyster', healthy, vegetarian, vegan, mexican, greek)
-ingredientDic['oyster mushroom'] = IngredientBook('oyster mushroom', healthy, vegetarian, vegan, mexican, greek)
-ingredientDic['oyster sauce'] = IngredientBook('oyster sauce', healthy, vegetarian, vegan, mexican, greek)
-ingredientDic['paella'] = IngredientBook('paella', healthy, vegetarian, vegan, mexican, greek)
-ingredientDic['pak choi'] = IngredientBook('pak choi', healthy, vegetarian, vegan, mexican, greek)
-ingredientDic['palm oil'] = IngredientBook('palm oil', healthy, vegetarian, vegan, mexican, greek)
-ingredientDic['palm sugar'] = IngredientBook('palm sugar', healthy, vegetarian, vegan, mexican, greek)
-ingredientDic['pancake mix'] = IngredientBook('pancake mix', healthy, vegetarian, vegan, mexican, greek)
-ingredientDic['pancetta'] = IngredientBook('pancetta', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['paneer’'] = IngredientBook('paneer’', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['papaya'] = IngredientBook('papaya', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['pappardelle'] = IngredientBook('pappardelle', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['paprika'] = IngredientBook('paprika', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['parmesan cheese'] = IngredientBook('parmesan cheese', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['parsley'] = IngredientBook('parsley', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['parsnip'] = IngredientBook('parsnip', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['passion fruit'] = IngredientBook('passion fruit', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['passion fruit juice'] = IngredientBook('passion fruit juice', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['pasta'] = IngredientBook('pasta', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['pastrami'] = IngredientBook('pastrami', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['pastry'] = IngredientBook('pastry', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['pea shoots'] = IngredientBook('pea shoots', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['peach'] = IngredientBook('peach', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['peanut butter'] = IngredientBook('peanut butter', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['peanut oil'] = IngredientBook('peanut oil', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['peanut'] = IngredientBook('peanut', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['pear'] = IngredientBook('pear', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['pea'] = IngredientBook('pea', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['pecan nut'] = IngredientBook('pecan nut', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['pecorino cheese'] = IngredientBook('pecorino cheese', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['penne'] = IngredientBook('penne', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['pepper'] = IngredientBook('pepper', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['peppercorn'] = IngredientBook('peppercorn', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['pepperoni'] = IngredientBook('pepperoni', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['perch'] = IngredientBook('perch', healthy, vegetarian, vegan, mexican, greek),
-ingredientDic['pesto'] = IngredientBook('pesto', healthy, vegetarian, vegan, mexican, greek),
+ingredientDic['olive'] = IngredientBook('olive', '', '', '', 'corn', 'kalamata olive')
+ingredientDic['olive oil'] = IngredientBook('olive oil', '', '', '', 'corn oil', '')
+ingredientDic['onion'] = IngredientBook('onion', '', '', '', '', '')
+ingredientDic['orange'] = IngredientBook('orange', '', '', '', 'lulo', 'clementine')
+ingredientDic['orange juice'] = IngredientBook('orange juice', 'organic orange juice', '', '', 'papaya juice', '')
+ingredientDic['oregano'] = IngredientBook('oregano', '', '', '', 'mexican oregano', '')
+ingredientDic['beef oxtail'] = IngredientBook('beef oxtail', '', 'jackfruit', 'jackfruit', 'carne asada', 'lamb')
+ingredientDic['oyster'] = IngredientBook('oyster', '', 'mushroom', 'mushroom', 'shrimp', '')
+ingredientDic['oyster mushroom'] = IngredientBook('oyster mushroom', '', '', '', 'onion', 'kalamata olives')
+ingredientDic['oyster sauce'] = IngredientBook('oyster sauce', '', 'soy sauce', 'soy sauce', '', '')
+ingredientDic['pak choi'] = IngredientBook('pak choi', '', '', '', 'green cabbage', 'cabbage')
+ingredientDic['palm oil'] = IngredientBook('palm oil', '', '', '', 'corn oil', 'olive oil')
+ingredientDic['palm sugar'] = IngredientBook('palm sugar', 'brown sugar', '', '', 'agave nectar', 'sugar')
+ingredientDic['pancake mix'] = IngredientBook('pancake mix', 'oatmeal pancake mix', 'oatmeal pancake mix', 'oatmeal pancake mix', '', '')
+ingredientDic['pancetta'] = IngredientBook('pancetta', '', 'eggplant', 'eggplant', 'cecina', 'pastrami')
+ingredientDic['paneer’'] = IngredientBook('paneer’', 'pecorino', '', 'almond cheese', 'queso blanco', 'feta cheese')
+ingredientDic['papaya'] = IngredientBook('papaya', '', '', '', '', 'peach')
+ingredientDic['pappardelle'] = IngredientBook('pappardelle', 'whole-grain pasta', '', 'vegan pasta', 'rice', 'flomaria')
+ingredientDic['paprika'] = IngredientBook('paprika', '', '', '', '', 'garlic powder')
+ingredientDic['parmesan cheese'] = IngredientBook('parmesan cheese', 'pecorino cheese', '', 'vegan parmesan cheese', 'cotija cheese', 'feta cheese')
+ingredientDic['parsley'] = IngredientBook('parsley', '', '', '', 'cilantro', 'cilantro')
+ingredientDic['parsnip'] = IngredientBook('parsnip', '', '', '', 'jicama', 'turnip')
+ingredientDic['passion fruit'] = IngredientBook('passion fruit', '', '', '', '', 'apricot')
+ingredientDic['passion fruit juice'] = IngredientBook('passion fruit juice', '', '', '', '', 'apricot juice')
+ingredientDic['pasta'] = IngredientBook('pasta', 'whole-grain pasta', '', 'vegan pasta', 'rice', 'flomaria')
+ingredientDic['pastrami'] = IngredientBook('pastrami', '', 'tempeh', 'tempeh', 'chorizo', 'greek')
+ingredientDic['pea shoots'] = IngredientBook('pea shoots', '', '', '', 'cilantro', 'cilantro')
+ingredientDic['peach'] = IngredientBook('peach', '', '', '', 'mago', '')
+ingredientDic['peanut butter'] = IngredientBook('peanut butter', '', '', '', 'marzapan', 'tahini')
+ingredientDic['peanut oil'] = IngredientBook('peanut oil', '', '', '', 'corn oil', 'olive oil')
+ingredientDic['peanut'] = IngredientBook('peanut', '', '', '', 'pinus cembroides', 'almond')
+ingredientDic['pear'] = IngredientBook('pear', '', '', '', 'tuna fruit', 'nectarine')
+ingredientDic['pea'] = IngredientBook('pea', '', '', '', 'black beans', 'green beans')
+
+-----------------------------------------------------------------------
+
+
+ingredientDic['pecan nut'] = IngredientBook('pecan nut', '', '', '', 'pinus cembroides', 'almond')
+ingredientDic['pecorino cheese'] = IngredientBook('pecorino cheese', '',  'vegan parmesan cheese', 'cotija cheese', 'feta cheese')
+ingredientDic['penne'] = IngredientBook('penne', healthy, vegetarian, vegan, mexican, greek)
+ingredientDic['pepper'] = IngredientBook('pepper', healthy, vegetarian, vegan, mexican, greek)
+ingredientDic['peppercorn'] = IngredientBook('peppercorn', healthy, vegetarian, vegan, mexican, greek)
+ingredientDic['pepperoni'] = IngredientBook('pepperoni', healthy, vegetarian, vegan, mexican, greek)
+ingredientDic['perch'] = IngredientBook('perch', healthy, vegetarian, vegan, mexican, greek)
+ingredientDic['pesto'] = IngredientBook('pesto', healthy, vegetarian, vegan, mexican, greek)
 ingredientDic['pheasant'] = IngredientBook('pheasant', healthy, vegetarian, vegan, mexican, greek),
 ingredientDic['piccalilli'] = IngredientBook('piccalilli', healthy, vegetarian, vegan, mexican, greek),
 ingredientDic['pickle'] = IngredientBook('pickle', healthy, vegetarian, vegan, mexican, greek),
@@ -579,6 +576,7 @@ ingredientDic['yeast'] = IngredientBook('yeast', 'healthy', 'vegetarian', 'vegan
 ingredientDic['yellow lentil'] = IngredientBook('yellow lentil', 'healthy', 'vegetarian', 'vegan', 'mexican', 'greek')
 ingredientDic['yogurt'] = IngredientBook('yogurt', 'healthy', 'vegetarian', 'vegan', 'mexican', 'greek')
 ingredientDic['zest'] = IngredientBook('zest', 'healthy', 'vegetarian', 'vegan', 'mexican', 'greek')]
+
 
 
 
