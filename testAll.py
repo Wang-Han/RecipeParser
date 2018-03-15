@@ -24,7 +24,7 @@ def testAll(url):
 	#index into the basic names
 	#print(scrapedIng)
 	#print(cookBook)
-	basicIngredients = get_all_names_plus_fixed_regex(scrapedIng, cookBook)[0]
+	basicIngredients = get_all_names_plus_fixed_rejects(scrapedIng, cookBook)[0]
 	
 	tools = get_tools_names(scrapedSteps)
 	methods = get_methods_names(scrapedSteps)	
@@ -38,12 +38,12 @@ def testAll(url):
 		mexican.append('substituted ' + str(i) + ' for ' + str(cookBook[i].mexican))	
 	
 	for i in basicIngredients:
-		for counter, s in enumerate(scrapedSteps):
-			healthySteps[counter] = re.sub(i, cookBook[i].healthy, s)
-			vegetarianSteps[counter] = re.sub(i, cookBook[i].vegetarian, s)
-			veganSteps[counter] = re.sub(i, cookBook[i].vegan, s)
-			greekSteps[counter] = re.sub(i, cookBook[i].greek, s)
-			mexicanSteps[counter] = re.sub(i, cookBook[i].mexican, s)
+		for s in scrapedSteps:
+			healthySteps.append(re.sub(i, cookBook[i].healthy, s))
+			vegetarianSteps.append(re.sub(i, cookBook[i].vegetarian, s))
+			veganSteps.append(re.sub(i, cookBook[i].vegan, s))
+			greekSteps.append(re.sub(i, cookBook[i].greek, s))
+			mexicanSteps.append(re.sub(i, cookBook[i].mexican, s))
 
 	transforms = [list(set(healthy)), list(set(vegetarian)), list(set(vegan)), list(set(greek)), list(set(mexican))]
 	transformNames = ['healthy', 'vegetarian', 'vegan', 'greek', 'mexican']
@@ -52,11 +52,12 @@ def testAll(url):
 		if l:
 			for ing in l:
 				print(ing + "\n")
-	print(tools)
-	print(methods)
 
-	print(healthySteps)
-	print(vegetarianSteps)
-	print(veganSteps)
-	print(greekSteps)
-	print(mexicanSteps)
+
+	stepLists = [healthySteps, vegetarianSteps, veganSteps, greekSteps, mexicanSteps]
+
+	for l in range(0, 5):
+		res = "";
+		for st in stepLists[l]:
+			res += (st + '\n')
+		print('Here are the steps to follow for a ' + transformNames[l] + ' version of this dish: \n' + res)

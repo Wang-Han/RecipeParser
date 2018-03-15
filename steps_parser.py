@@ -80,7 +80,10 @@ def print_steps(steps, basicIngredients):
     output = ['Step', 'Ingredients', 'Tools', 'Primary Cooking Methods', 'Other Cooking Methods', 'Time']
     for dic in dics:
         for item in output:
-            print item + ":" + str(dic[item])
+        	priStr = ""
+		for i in dic[item]:
+			priStr += (i + ' ')
+		print item + ": " + priStr    
 
 # print_steps(steps_list, basicIngredients)
 
