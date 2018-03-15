@@ -9,7 +9,7 @@ from nltk.tokenize import RegexpTokenizer
 verbs_to_tools_mapping = { 'cut' : 'knife', 'chop':'knife', 'dice':'knife', 'julienne':'knife', 'mince':'knife', 'minced' : 'knife', 'slice':'knife', 'fold': 'wooden spoon', 'stir':'wooden spoon', 'glaze':'spoon', 'drizzle':'spoon', 'marinate': 'bowl', 'beat':'fork', 'shred': 'food processor', 'baste': 'baster', 'basting' : 'baster', 'sift':'colander', 'cream':'hand mixer', 'grate':'grater', 'whisk':'whisk', 'peel':'peeler', 'puree':'blender', 'crush':'pestle mortar',}
 tools_to_methods_mapping = { 'baking powder':'bake', 'baking soda': 'bake', 'preheat' : 'preheat', 'mixing bowl': 'mix' }
 indeed_tools = ['casserole', 'knife', 'cooker', 'microwave safe bowl', 'baster', 'pan', 'peeler', 'cube tray', 'strainer', 'measuring cups', 'fruit muddler', 'freezer tray', 'plate', 'yogurt maker', 'fry pan', 'cuisinart', 'grinder', 'spatula', 'mincer', 'fork', 'hullster', 'shaker', 'grate and slice set', 'scale', 'spoon', 'press', 'whisk', 'skimmer', 'cake pan', 'foil', 'tongs', 'potato masher', 'soup ladle', 'brush', 'an opener', 'juicer press', 'floor sifter', 'pizza wheel', 'salt shaker', 'grater', 'corkscrew', 'lid', 'pepper grinder', 'bowl', 'measuring cup', 'utensil', 'egg topper', 'cheese slicer', 'scoop', 'skimmer', 'strainer', 'serve ladle', 'saute spoon', 'cutting board', 'spill stopper', 'splatter screen', 'burner', 'egg beater', 'potato ricer', 'food mill', 'grater', 'peeler', 'slicer', 'stripper', 'corn zipper', 'shear', 'snips', 'chopper', 'mandoline', 'mortar', 'pestle', 'can', 'mister', 'seal', 'stopper', 'pourer', 'scale', 'tea ball', 'timer', 'thermometer', 'board', 'baking cups', 'cloth', 'parchment roll', 'aluminium foil', 'cupcake liners', 'decorating pen', 'muffin papers', 'lifter', 'gloves', 'rack', 'rolling pin', 'skewer', 'wrangler', 'oven', 'baking pan', 'bags', 'smoother', 'sieve', 'wheel', 'shield', 'probe', 'rack', 'blender', 'scraper', 'microwave', 'lighter', 'saucepan', 'baking dish', 'plastic bag', 'paper warp', 'pan', 'dish', 'skillet', 'mixing bowl', 'frying pan', 'baking sheet', 'loaf pan', 'pot']
-verbs = ['sear', 'rotisserie', 'broil', 'fry', 'grill', 'barbeque', 'poach', 'sautee', 'saute', 'pressure cook', 'steam', 'stew', 'stir-fry', 'stir fry', 'roast', 'freeze', 'mince', 'grate', 'coddle', 'blanch', 'marinate', 'skillet', 'smoke', 'microwave', 'bake', 'baste', 'boil', 'stew', 'pound', 'crush', 'squeeze', 'stir', 'mix', 'grease', 'preheat', 'melt', 'arrange', 'coat', 'turn', 'sprinkle', 'season', 'place', 'form', 'combine', 'add', 'blend', 'pour', 'slice', 'cook', 'reduce', 'adjust', 'spoon', 'cut', ]
+verbs = ['sear', 'rotisserie', 'broil', 'fry', 'grill', 'barbeque', 'poach', 'sautee', 'saute', 'pressure cook', 'steam', 'stew', 'stir-fry', 'stir fry', 'roast', 'freeze', 'mince', 'grate', 'coddle', 'blanch', 'marinate', 'skillet', 'smoke', 'microwave', 'bake', 'baste', 'boil', 'stew', 'pound', 'crush', 'squeeze', 'stir', 'mix', 'grease', 'preheat', 'melt', 'coat', 'turn', 'sprinkle', 'season', 'place', 'form', 'combine', 'add', 'blend', 'pour', 'slice', 'cook', 'reduce', 'adjust', 'spoon', 'cut', ]
 
 # get the name of cooking tools
 def get_tools_names(steps):
@@ -79,16 +79,19 @@ def get_methods_names(steps):
                 if step_string[i] == method or step_string[i] + ' ' + step_string[i + 1] == method:
                     mp[method] += 1
 
-    max_number = mp.most_common(1)[0][1]
+    max_number = 0
+    if len(mp) > 0:
+        max_number = mp.most_common(1)[0][1]
     primary_list = []
     for method, number in mp.most_common():
         if number == max_number:
             primary_list.append(method)
     primary_list.sort()
-    primary_method_res.append(primary_list[0])
-    for method in mp.most_common():
-        if method[0] not in primary_method_res:
-            other_methods_res.append(method[0])
+    if len(primary_list) > 0:
+        primary_method_res.append(primary_list[0])
+        for method in mp.most_common():
+            if method[0] not in primary_method_res:
+                other_methods_res.append(method[0])
     return [primary_method_res, other_methods_res]
 
 # print get_methods_names(steps_list)
