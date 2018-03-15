@@ -54,3 +54,9 @@ def testAll(url):
 				print(ing + "\n")
 	print(tools)
 	print(methods)
+
+	print(healthySteps)
+	print(vegetarianSteps)
+	print(veganSteps)
+	print(greekSteps)
+	print(mexicanSteps)

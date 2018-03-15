@@ -266,7 +266,7 @@ def get_all_names_plus_fixed_rejects(ings, ingredient_book):
     c.append(merge_list)
     return c
 
-d = get_all_names_plus_fixed_rejects(ings, "")
+#d = get_all_names_plus_fixed_rejects(ings, "")
 #
 # # print d[0], '\n'
 # # print d[1], '\n'
