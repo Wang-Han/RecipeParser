@@ -12,7 +12,6 @@ ingNames =[]
 for i in ingredients:
 	ingNames.append(Ingredient(i).name_with_descriptor)
 
-print ingNames
 
 '''meats= ['chicken','wings', 'beef', 'ground beef', 'duck', 'pork', 'ham','prosciutto', 'fish', 'sea bass', 'tilapia', 'salmon', 'halibut', 'trout','flounder',
 'turkey', 'meat stock', 'liver', 'crab', 'shrimp', 'liver', 'bacon', 'lamb']'''
@@ -22,18 +21,18 @@ meat_substitutes = {'chicken': 'eggplant', 'wings': 'eggplant', 'beef': 'tofu', 
 
 
 for i in ingNames:
-	i =[ v for k,v in meat_substitutes.items() if k in i]
+	mm = [ v for k,v in meat_substitutes.items() if k in i]
 
-print ingNames
+print mm
 
-for n, i in enumerate(ingNames):
+'''for n, i in enumerate(ingNames):
 	for j in meats:
 		if i == j:
 			ingNames[n] = meat_substitutes[j]
 
 print ingNames
 
-'''for i in ingredients:
+for i in ingredients:
 	Ingredient(i).name = ingNames[i]
 
 print ingredients
