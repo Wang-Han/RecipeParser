@@ -6,9 +6,10 @@ from pattern.en import pluralize
 ings = [u'6 egg yolks', u'3/4 cup white sugar', u'2/3 cup milk',
  u'1 1/4 cups heavy cream', u'1/2 teaspoon vanilla extract', u'1 pound mascarpone cheese',
   u'1/4 cup strong brewed coffee, room temperature', u'2 tablespoons rum',
-  u'2 (3 ounce) packages ladyfinger cookies', u'1 tablespoon unsweetened cocoa powder', u'2 cups rose water chilled']
+  u'2 (3 ounce) packages ladyfinger cookies', u'1 tablespoon unsweetened cocoa powder',
+  u'2 cups rose water chilled', u'1 cup shiitake chopped']
 
-#ingredient_book = {}
+ingredient_book = {}
 
 fraction_match = r"(\d+[\/\d. ]*|\d)" # /g means global match
 measurements = [r'([a-z]+)spoons?', r'cloves?', r'cups?', r'pounds?', r'ounces?', r'large',
@@ -27,6 +28,11 @@ def frac_to_float(frac_str):
         frac = float(num) / float(denom)
         return whole - frac if whole < 0 else whole + frac
 
+def unique_list(l):
+    ulist = []
+    [ulist.append(x) for x in l if x not in ulist]
+    return ulist
+
 '''
 ex. get_all_names(recipe_ingredient_list_from_scraper, ingredient_book) -->
 ['egg yolk', 'white sugar', 'milk', 'cream', 'vanilla extract', 'mascarpone cheese', 'coffee', 'rum', 'ladyfinger cookies', 'cocoa']
@@ -38,16 +44,16 @@ def get_all_names(ings, ingredient_book):
     ings = map(lambda x:x.lower(), ings)
 
     # get bbc ingredients
-    # all_ingredients = open("new_ing.txt", "r")
-    # all_ingredients = all_ingredients.read()
+    # all_i = open("new_ing.txt", "r")
+    # all_i = all_i.read()
 
     all_ingredients = ingredient_book.keys()
 
-    # lst = all_ingredients.split(',')
-    # all_ing_list = []
+    # lst = all_i.split(',')
+    # all_ingredients = []
     # for i in lst:
     #     i = i.replace('u\'', '').replace('\'', '').strip()
-    #     all_ing_list.append(i)
+    #     all_ingredients.append(i)
 
     #get names
     t = []
@@ -61,8 +67,7 @@ def get_all_names(ings, ingredient_book):
             t.append(true_ing.lower())
         elif match_plural:
             t.append(pluralize(true_ing.lower()))
-        # else:
-        #     rejected.append(true_ing.lower())
+
 
     seen = set()
     seen_add = seen.add
@@ -150,7 +155,7 @@ def print_ingredients(ings):
         print '\n'
 
 '''
-input: allrecipes url
+input: ings (recipe ings), ingredient_book(full ing dict)
 output:
 {'olive oil': {'preparation': u'', 'descriptor': u'', 'measurement': u'tablespoon', 'name': 'olive oil', 'quantity': 1.0}, 'parmesan cheese': {'preparation': u'', 'descriptor'
 : u'grated', 'measurement': u'cup', 'name': 'parmesan cheese', 'quantity': 0.25}, etc.}
@@ -185,18 +190,87 @@ def parse_ingredients(ings, ingredient_book):
 
 
 def fix_rejects(rejects, ingredient_book):
+    fixed = []
     for r in rejects:
         r_split = r.split()
-        r_split = [w for w in r_split if not re.search(fraction_match, w)] # take out nums
-        print r_split
+        # r_split = [w for w in r_split if not re.search(fraction_match, w)] # take out nums
+        # print r_split
+        # get bbc ingredients
+        # all_i = open("new_ing.txt", "r")
+        # all_i = all_i.read()
+
+        all_ingredients = ingredient_book.keys()
+
+        # lst = all_i.split(',')
+        # all_ingredients = []
+        # for i in lst:
+        #     i = i.replace('u\'', '').replace('\'', '').strip()
+        #     all_ingredients.append(i)
+
+        t = []
+        for true_ing in all_ingredients: # real ings from bbc
+            ing_regex_single = r'\b{0}\b'.format(true_ing)
+            ing_regex_plural = r'\b{0}\b'.format(pluralize(true_ing))
+            match_single = re.search(ing_regex_single, true_ing.lower())
+            match_plural = re.search(ing_regex_plural, true_ing.lower())
+            if match_single:
+                t.append(true_ing.lower())
+            elif match_plural:
+                t.append(pluralize(true_ing.lower()))
+
+        full_name = []
+        for s in r_split: # word in rejected ingredient
+            match_flag = False
+            for i in t: # i in ing_book_keys
+                s_regex_single = r'\b{0}\b'.format(s)
+                s_regex_plural = r'\b{0}\b'.format(pluralize(s))
+                match_single = re.search(s_regex_single, i.lower())
+                match_plural = re.search(s_regex_plural, i.lower())
+                if match_single:
+                    match_flag = True
+                    full_name.append(i)
+                    # fixed.append(i)
+                elif match_plural:
+                    match_flag = True
+                    full_name.append(i)
+                    # fixed.append(i)
+                else:
+                    if s not in full_name:
+                        full_name.append(s)
+
+            if match_flag:
+                break
+        f = ' '.join(full_name)
+        full_name_result = ' '.join(unique_list(f.split()))
+        fixed.append(full_name_result)
+    return fixed
 
 
-a = get_all_names(ings, ingredient_book)
-# all_names = a[0]
-# print all_names
-# print_ingredients(ings, ingredient_book)
-# p = parse_ingredients(ings, ingredient_book)
-# print p["coffee"]
-print "REJECTED:", a[2]
+'''
+pretty much exactly like get_all_names, except this allows us
+to include ingredients that we don't have in our db
+returns:
+index 0 --> list of ingredient names
+1 --> desc_and_prep
+2 --> rejected stuff
+3 --> merged list of ingredients including rejects
+'''
+def get_all_names_plus_fixed_rejects(ings, ingredient_book):
+    a = get_all_names(ings, ingredient_book)
 
-fix_rejects(a[2], "")
+    b = fix_rejects(a[2], "")
+
+    merge_list = ings + b
+
+    c = get_all_names(merge_list, ingredient_book)
+    c.append(merge_list)
+    return c
+
+# d = get_all_names_plus_fixed_rejects(ings, "")
+#
+# # print d[0], '\n'
+# # print d[1], '\n'
+# # print d[3]
+#
+# e = parse_ingredients(d[3], ingredient_book)
+# print e["rose wine"]
