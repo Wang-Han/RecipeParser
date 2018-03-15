@@ -4,15 +4,14 @@ import re
  break down ingredients
  # repo: https://github.com/tlitre/RecipeParser.git
 
-
+ingredients_list = ["1/8 teaspoon hot pepper sauce", "4 bone-in chicken breast halves, with skin",
+"12 pounds spaghetti", "1 clove crushed garlic", "1/2 teaspoon salt", "2 1/2 cups white sugar",
+"2 tablespoons melted butter", "2 1/3 teaspoons milk", "4 3/5 ounces goat milk"]
 '''
 
-ingredients_list = ["1 1/3 cups shredded mozzarella cheese", "1/8 teaspoon hot pepper sauce", "4 bone-in chicken breast halves, with skin",
-"12 pounds spaghetti", "1 clove crushed garlic", "1/2 teaspoon salt", "2 1/2 cups cheddar cheese",
-"2 tablespoons melted butter", "2 1/3 teaspoons milk", "4 3/5 ounces goat milk"]
-# ingredients_list =[]
+ingredients_list =[]
 
-measurements = [r'([a-z]+)spoons?', r'cloves?', r'cups?', r'pounds?', r'ounces?']
+measurements = [r'([a-z]+)spoons?', r'cloves?', r'cups?', r'pounds?', r'ounces?', r'skinless']
 
 fraction_match = r"(\d+[\/\d. ]*|\d)" # /g means global match
 
@@ -128,7 +127,7 @@ def print_ingredient(ing):
     # i_name = find_ingredient_name(i)
     print "NAME:", b.name, "\nQTY:", b.quantity, "\nMEASUREMENT:", b.measurement, "\nDESCRIPTOR:", b.descriptor, "\nPREPARATION:", b.preparation, '\n'
 
-# for  i in ingredients_list:
-#     print_ingredient(i)
-# t = '4 skinless, boneless chicken breast halves'
-# print_ingredient(t)
+for  i in ingredients_list:
+    print_ingredient(i)
+t = '4 skinless, boneless chicken breast halves'
+print_ingredient(t)
