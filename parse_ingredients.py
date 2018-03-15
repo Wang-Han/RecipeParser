@@ -130,7 +130,7 @@ P:
 def print_ingredients(ings):
     # recipe = scrapeRecipe(url)
     # ings = recipe[0]
-    all_results = get_all_names(ings, ingredient_book)
+    all_results = get_all_names(ings, "")
     names = all_results[0]
     desc_and_preps = all_results[1]
     for x in range(len(names)):
@@ -158,7 +158,7 @@ use: ex. quantity of parmesan in : p["parmesan cheese"]["quantity"] --> 0.25
 def parse_ingredients(ings, ingredient_book):
     # recipe = scrapeRecipe(url)
     # ings = recipe[0]
-    all_results = get_all_names(ings, ingredient_book)
+    all_results = get_all_names(ings, "")
     names = all_results[0]
     desc_and_preps = all_results[1]
 
@@ -188,7 +188,7 @@ def fix_rejects(rejects, ingredient_book):
         r_split = [w for w in r_split if not re.search(fraction_match, w)] # take out nums
         print r_split
 
-a = get_all_names(ings, ingredient_book)
+a = get_all_names(ings, "")
 # all_names = a[0]
 # print all_names
 # print_ingredients(ings, ingredient_book)
