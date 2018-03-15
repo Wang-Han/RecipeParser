@@ -50,7 +50,7 @@ def get_all_names(ings): #, ing_book):
     #get names
     t = []
     rejected = []
-    for true_ing in all_ing_list: # real ings from bbc
+    for true_ing in all_ingredients: # real ings from bbc
         ing_regex_single = r'\b{0}\b'.format(true_ing)
         ing_regex_plural = r'\b{0}\b'.format(pluralize(true_ing))
         match_single = re.search(ing_regex_single, true_ing.lower())
