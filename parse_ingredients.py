@@ -134,24 +134,24 @@ D: grated
 P:
 "
 '''
-def print_ingredients(ings):
+def print_ingredients(ings, ingredient_book):
     # recipe = scrapeRecipe(url)
     # ings = recipe[0]
-    all_results = get_all_names(ings, ingredient_book)
+    all_results = get_all_names_plus_fixed_rejects(ings, ingredient_book)
     names = all_results[0]
     desc_and_preps = all_results[1]
     for x in range(len(names)):
         name = names[x]
-        print "N:", name
+        print "Name:", name
         qty = get_ing_quantity(desc_and_preps[x][0])
-        print "Q:", qty
+        print "Quantity:", qty
         msrmnt = get_ing_measurement(desc_and_preps[x][0])
-        print "M:", msrmnt
+        print "Measurement:", msrmnt
         desc = get_ing_descriptor(desc_and_preps[x][0])
-        print "D:", desc
+        print "Descriptor:", desc
         if len(desc_and_preps[x]) > 1:
             prep = get_ing_preparation(desc_and_preps[x][1])
-            print "P:", prep
+            print "Preparation:", prep
         print '\n'
 
 '''
