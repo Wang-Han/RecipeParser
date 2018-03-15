@@ -185,7 +185,7 @@ def parse_ingredients(ings, ingredient_book):
             prep = get_ing_preparation(desc_and_preps[x][1])
             parsed["preparation"] = prep
         all_parsed_ings[name] = parsed
-    print all_parsed_ings
+    # print all_parsed_ings
     return all_parsed_ings
 
 
@@ -266,7 +266,7 @@ def get_all_names_plus_fixed_rejects(ings, ingredient_book):
     c.append(merge_list)
     return c
 
-# d = get_all_names_plus_fixed_rejects(ings, "")
+d = get_all_names_plus_fixed_rejects(ings, "")
 #
 # # print d[0], '\n'
 # # print d[1], '\n'
@@ -274,3 +274,16 @@ def get_all_names_plus_fixed_rejects(ings, ingredient_book):
 #
 # e = parse_ingredients(d[3], ingredient_book)
 # print e["rose wine"]
+
+def print_parsed_ingredients(ings, ingredient_book):
+    parsed = []
+    ing_dict = parse_ingredients(get_all_names_plus_fixed_rejects(ings, ingredient_book)[3], ingredient_book)
+    for k in ing_dict.keys():
+        b = "{0} {1} {2} {3} {4}\n".format(ing_dict[k]["quantity"], ing_dict[k]["measurement"], ing_dict[k]["descriptor"], ing_dict[k]["name"], ing_dict[k]["preparation"])
+        c = ' '.join(b.split())
+        parsed.append(c)
+    for i in parsed:
+        print i
+    return parsed
+
+# print_parsed_ingredients(d[3], ingredient_book)
