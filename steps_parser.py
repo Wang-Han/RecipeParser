@@ -30,6 +30,7 @@ def get_steps_info(steps, basicIngredients) :
 
 
 def get_steps_ingredients(step, basicIngredients) :
+    
     step_ingredients = []
     tokenizer = RegexpTokenizer(r'\w+')
     step_txt = str(step)
@@ -53,6 +54,16 @@ def get_steps_ingredients(step, basicIngredients) :
             step_ingredients.append(step_string[i])
             visited.append(step_string[i])
     return step_ingredients
+    '''
+    stepIngredients = []
+    for i in basicIngredients:
+        print(i)
+	print(step)
+	res = re.search(i, step)
+        if(res):
+            stepIngredients.append(res.group(0))
+    return stepIngredients
+    '''
 
 def get_steps_time(step):
     step_time = []
