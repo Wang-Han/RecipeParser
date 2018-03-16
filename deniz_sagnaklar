@@ -1,0 +1,4 @@
+I made the ingredient dictionary from which the functions take transformation substitutes from. We took a compiled list 
+of ingredients from "https://www.bbc.co.uk/food/ingredients/by/letter/" and I made a ingredientDic item for all of the 
+ingredients in this list with subtitutes for healthy, vegetarian, vegan, Mexican and Greek. I cleaned this list up for 
+British and insignificant ingredients, then filled in new ingredients that were missing but commonly used in AllRecipes.
