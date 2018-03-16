@@ -22,7 +22,7 @@ def transformIt(url):
 	elif choice == 'greek':
 		make_greek(url)	
 	repeater = raw_input('\n\nWould you like to do another one? (y/n)\n')
-	if(repeater == 'y' or 'yes' or True or 1):
+	if(repeater == 'y' or 'yes'):
 		transformIt(url)
 
 
@@ -30,7 +30,7 @@ url = raw_input('Hello and welcome to SomeRecipes.com!\nTo start out, please inp
 while(not re.search('allrecipes.com/recipe/', url)):
 	url = raw_input('Uh-oh, it looks like that\s isn\'t a valid url\nTry again with a url from AllRecipes!\n')
 answer = raw_input('\nThanks! Now do you want some info about that recipe?\n Otherwise we\'ll jump straight to transformations. (y/n)\n')
-if(answer == 'y' or 'yes' or 1 or True):
+if(answer == 'y' or 'yes'):
 	print("Cool! Here's some more info on it:\n")
 	print_original_ingredients(url)
 	scraped = scrapeRecipe(url)
