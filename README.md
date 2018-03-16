@@ -9,4 +9,4 @@ Scrape and parse recipes from AllRecipes then make ingredient substitutions and 
 * pattern.en
 
 ### To run:
-From submission.py, run transform_all(url), where url is the url of any ingredient from allrecipes.com
+From submission.py, just run letsCook.py!
