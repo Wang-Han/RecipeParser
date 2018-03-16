@@ -18,7 +18,7 @@ def get_steps_info(steps, basicIngredients) :
             step_num_list = []
             step_num_list.append(str(cnt))
             each_step_info['Step'] = step_num_list
-            #each_step_info['Ingredients'] = get_steps_ingredients(step, basicIngredients)
+            each_step_info['Ingredients'] = get_steps_ingredients(step, basicIngredients)
             each_step_info['Tools'] = get_tools_names(step_list)
             methods_res = get_methods_names(step_list)
             each_step_info['Primary Cooking Methods'] = methods_res[0]
