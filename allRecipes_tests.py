@@ -1,16 +1,17 @@
 from write_book import * 
-from edit_parser import *
+from parse_ingredients import *
 import requests
 from time import sleep
 def testIngredients(startNum, recipeCount):
 	failedIngredients = []
-	ingredientBook = writeBook().keys()
+	cookBook = writeBook()
+	ingredientBook = cookBook.keys()
 	
 	for i in range(startNum, recipeCount + startNum):
 		url = 'https://www.allrecipes.com/recipe/' + str(i)
 		page = requests.get(url)
 		if page.status_code == 200:
-			ingredients = get_all_names(url)[0]
+			ingredients = get_all_names(url, cookBook)[0]
 			if ingredients:
 				for n in ingredients:
 					print('Now Testing: ' + n)
@@ -19,4 +20,4 @@ def testIngredients(startNum, recipeCount):
 		sleep(2)
 	print(failedIngredients)
 
-testIngredients(8740, 10)			
+testIngredients(213717, 50)			
