@@ -1,0 +1,3 @@
+I built the ingredient parser/functions in parsed_ingredients.py. I scraped ingredients from https://www.bbc.co.uk/food/ingredients/by/letter/, to check against ingredients from allrecipes.
+I also built the function that changes "rejected" ingredients from allrecipes (ingredients that aren't in our recipe book) into real related ingredients in our cookbook.
+I wrote the x_ingredients and make_x functions in testAll.py. Basically, everything to do with parsing ingredients.
