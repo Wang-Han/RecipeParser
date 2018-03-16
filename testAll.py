@@ -278,7 +278,7 @@ def make_mexican(url):
 	mx = mexican_ingredients(url)
 
 def make_greek(url):
-	print '\n', "Vegan Transformation:", '\n'
+	print '\n', "Greek Transformation:", '\n'
 	grk = greek_ingredients(url)
 
 def make_healthy(url):
