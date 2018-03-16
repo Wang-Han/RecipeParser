@@ -456,7 +456,7 @@ def writeBook():
     ingredientDic['sage'] = IngredientBook('sage', '', '', '', 'cilantro', '')
     ingredientDic['salad greens'] = IngredientBook('salad greens', '', '', '', '', '')
     ingredientDic['salami'] = IngredientBook('salami', 'smoked salmon', 'portobello mushroom', 'portobello mushroom', 'cured chorizo', 'loukanika')
-    ingredientDic['salmon'] = IngredientBook('salmon', '', 'tofu', 'tofu', 'sea bass', 'grouper')
+    ingredientDic['salmon'] = IngredientBook('salmon', '', 'tofu', 'tofu', 'tilapia', 'grouper')
     ingredientDic['salsa'] = IngredientBook('salsa', '', '', '', '', 'pepper hummus')
     ingredientDic['salt'] = IngredientBook('sea salt', '', '', '', '', '')
     ingredientDic['sardine'] = IngredientBook('sardine', '', 'kimchi', 'kimchi', '', '')
