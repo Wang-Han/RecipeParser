@@ -292,6 +292,6 @@ def transform_all(url):
 	make_vegetarian(url)
 	make_mexican(url)
 
-print_original_ingredients("https://www.allrecipes.com/recipe/236915/lemon-buttermilk-pound-cake-with-aunt-evelyns-lemon-glaze/?internalSource=streams&referringId=276&referringContentType=recipe%20hub&clickId=st_trending_b")
+#print_original_ingredients("https://www.allrecipes.com/recipe/236915/lemon-buttermilk-pound-cake-with-aunt-evelyns-lemon-glaze/?internalSource=streams&referringId=276&referringContentType=recipe%20hub&clickId=st_trending_b")
 
-transform_all("https://www.allrecipes.com/recipe/236915/lemon-buttermilk-pound-cake-with-aunt-evelyns-lemon-glaze/?internalSource=streams&referringId=276&referringContentType=recipe%20hub&clickId=st_trending_b")
+#transform_all("https://www.allrecipes.com/recipe/236915/lemon-buttermilk-pound-cake-with-aunt-evelyns-lemon-glaze/?internalSource=streams&referringId=276&referringContentType=recipe%20hub&clickId=st_trending_b")
