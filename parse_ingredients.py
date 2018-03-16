@@ -134,24 +134,24 @@ D: grated
 P:
 "
 '''
-def print_ingredients(ings):
+def print_ingredients(ings, ingredient_book):
     # recipe = scrapeRecipe(url)
     # ings = recipe[0]
-    all_results = get_all_names(ings, ingredient_book)
+    all_results = get_all_names_plus_fixed_rejects(ings, ingredient_book)
     names = all_results[0]
     desc_and_preps = all_results[1]
     for x in range(len(names)):
         name = names[x]
-        print "N:", name
+        print "Name:", name
         qty = get_ing_quantity(desc_and_preps[x][0])
-        print "Q:", qty
+        print "Quantity:", qty
         msrmnt = get_ing_measurement(desc_and_preps[x][0])
-        print "M:", msrmnt
+        print "Measurement:", msrmnt
         desc = get_ing_descriptor(desc_and_preps[x][0])
-        print "D:", desc
+        print "Descriptor:", desc
         if len(desc_and_preps[x]) > 1:
             prep = get_ing_preparation(desc_and_preps[x][1])
-            print "P:", prep
+            print "Preparation:", prep
         print '\n'
 
 '''
@@ -258,7 +258,7 @@ index 0 --> list of ingredient names
 def get_all_names_plus_fixed_rejects(ings, ingredient_book):
     a = get_all_names(ings, ingredient_book)
 
-    b = fix_rejects(a[2], "")
+    b = fix_rejects(a[2], ingredient_book)
 
     merge_list = ings + b
 
@@ -266,7 +266,6 @@ def get_all_names_plus_fixed_rejects(ings, ingredient_book):
     c.append(merge_list)
     return c
 
-#d = get_all_names_plus_fixed_rejects(ings, "")
 #
 # # print d[0], '\n'
 # # print d[1], '\n'
@@ -282,8 +281,8 @@ def print_parsed_ingredients(ings, ingredient_book):
         b = "{0} {1} {2} {3} {4}\n".format(ing_dict[k]["quantity"], ing_dict[k]["measurement"], ing_dict[k]["descriptor"], ing_dict[k]["name"], ing_dict[k]["preparation"])
         c = ' '.join(b.split())
         parsed.append(c)
-    for i in parsed:
-        print i
+    # for i in parsed:
+    #     print i
     return parsed
 
 # print_parsed_ingredients(d[3], ingredient_book)
