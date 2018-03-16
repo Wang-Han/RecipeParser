@@ -7,9 +7,9 @@ from parse_ingredients import *
 
 def transformIt(url):
 	which = ['healthy', 'vegetarian', 'vegan', 'mexican', 'greek']
-	choice = raw_input('Which transform would you like to see?\nType in healthy, vegetarian, vegan, mexican, or greek!\n')
+	choice = raw_input('\nWhich transform would you like to see?\nType in healthy, vegetarian, vegan, mexican, or greek!\n')
 	while(choice not in which):
-		choice = raw_input('Sorry, it looks like that we haven\'t implemented that one yet.\n Try typing in healthy, vegetarian, vegan, mexican, or greek!\n')
+		choice = raw_input('\nSorry, it looks like that we haven\'t implemented that one yet.\n Try typing in healthy, vegetarian, vegan, mexican, or greek!\n')
 	print('Your ' + choice + ' transformation is coming right up!\n')
 	if choice == 'healthy':
 		make_healthy(url)
@@ -21,7 +21,7 @@ def transformIt(url):
 		make_mexican(url)
 	elif choice == 'greek':
 		make_greek(url)	
-	repeater = raw_input('Would you like to do another one? (y/n)\n')
+	repeater = raw_input('\n\nWould you like to do another one? (y/n)\n')
 	if(repeater == 'y' or 'yes' or True or 1):
 		transformIt(url)
 
@@ -41,6 +41,6 @@ if(answer == 'y' or 'yes' or 1 or True):
 	print_steps(scrapedSteps, basicIngredients)
 	print_tools(scrapedSteps)
 	print_methods(scrapedSteps)
-print('Let\'s move on to some transformations!\n')
+print('\n\nLet\'s move on to some transformations!\n')
 transformIt(url)
 print('Okay then. Thanks for using SomeRecipes, come back soon!')
